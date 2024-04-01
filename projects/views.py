@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django. contrib.auth.decorators import login_required
 from .models import Project
 from .forms import ProjectForm
 
@@ -9,7 +10,7 @@ def projects(request):
     context = {'projects': projects}
     return render(request,'projects/projects.html',context)
 
-
+@login_required(login_url='login')
 def project(request,pk):
     projectObj = Project.objects.get(id=pk)
     # tags = projectObj.tags.all()
